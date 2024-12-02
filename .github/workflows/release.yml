@@ -22,6 +22,14 @@ jobs:
           toolchain: stable
           target: ${{ matrix.target }}
 
+      - name: Install dependencies for Windows
+        if: matrix.target == 'x86_64-pc-windows-gnu'
+        run: sudo apt-get install -y gcc-mingw-w64-x86-64
+
+      - name: Install dependencies for Apple Darwin
+        if: matrix.target == 'x86_64-apple-darwin'
+        run: sudo apt-get install -y clang
+
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
