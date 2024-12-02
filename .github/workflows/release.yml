@@ -26,7 +26,7 @@ jobs:
         run: cargo build --release --target ${{ matrix.target }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.target }}-binary
           path: target/${{ matrix.target }}/release/uuml
@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Download binaries
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.target }}-binary
           path: ./binaries
