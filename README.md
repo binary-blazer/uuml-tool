@@ -1,4 +1,4 @@
-# ÜÜML Tool
+# UUML Tool
 
 ## Description
 
