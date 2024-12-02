@@ -2,7 +2,7 @@
 
 ## Description
 
-The ÜÜML Tool is a command-line utility designed to replace German Umlauts in HTML files with their corresponding HTML entities. This tool is particularly useful for web developers who need to ensure that their HTML files are correctly encoded for different browsers and platforms.
+The UUML Tool is a command-line utility designed to replace German Umlauts in HTML files with their corresponding HTML entities. This tool is particularly useful for web developers who need to ensure that their HTML files are correctly encoded for different browsers and platforms.
 
 ### Features
 
@@ -12,7 +12,7 @@ The ÜÜML Tool is a command-line utility designed to replace German Umlauts in 
 
 ## Usage
 
-To use the ÜÜML Tool, you can specify either a single HTML file or a directory containing HTML files. The tool will process the specified file or all HTML files in the specified directory, replacing Umlauts with their corresponding HTML entities.
+To use the UUML Tool, you can specify either a single HTML file or a directory containing HTML files. The tool will process the specified file or all HTML files in the specified directory, replacing Umlauts with their corresponding HTML entities.
 
 ### Examples
 
@@ -36,7 +36,7 @@ $ uuml -d path/to/directory
 
 ### Building from Source
 
-To build the ÜÜML Tool from source, follow these steps:
+To build the UUML Tool from source, follow these steps:
 
 1. Clone the repository:
 
