@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        target: [x86_64-unknown-linux-gnu, x86_64-pc-windows-gnu, x86_64-apple-darwin]
+        target: [x86_64-unknown-linux-gnu, x86_64-pc-windows-gnu]
 
     steps:
       - name: Checkout repository
@@ -26,18 +26,6 @@ jobs:
       - name: Install dependencies for Windows
         if: matrix.target == 'x86_64-pc-windows-gnu'
         run: sudo apt-get install -y gcc-mingw-w64-x86-64
-
-      - name: Install dependencies for Apple Darwin
-        if: matrix.target == 'x86_64-apple-darwin'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang cmake
-          git clone https://github.com/tpoechtrager/osxcross.git
-          cd osxcross
-          ./tools/get_dependencies.sh
-          UNATTENDED=yes OSX_VERSION_MIN=10.11 ./build.sh
-          export PATH=$PATH:$(pwd)/target/bin
-          cd ..
 
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
