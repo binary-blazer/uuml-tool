@@ -29,7 +29,9 @@ jobs:
 
       - name: Install dependencies for Apple Darwin
         if: matrix.target == 'x86_64-apple-darwin'
-        run: sudo apt-get install -y clang
+        run: |
+          sudo apt-get install -y clang
+          sudo apt-get install -y osxcross
 
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
