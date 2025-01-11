@@ -36,10 +36,6 @@ jobs:
           name: ${{ matrix.target }}-binary
           path: target/${{ matrix.target }}/release/uuml${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || '' }}
 
-      - name: List target directory (Windows)
-        if: matrix.target == 'x86_64-pc-windows-gnu'
-        run: ls target/${{ matrix.target }}/release
-
   release:
     needs: build
     runs-on: ubuntu-24.04
@@ -57,11 +53,15 @@ jobs:
           name: x86_64-unknown-linux-gnu-binary
           path: ./binaries
 
+      - name: Rename Windows binary
+        run: mv ./binaries/uuml.exe ./binaries/uuml-win.exe
+
+      - name: Rename Linux binary
+        run: mv ./binaries/uuml ./binaries/uuml-linux
+
       - name: Upload binaries to release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            ./binaries/uuml#uuml-linux
-            ./binaries/uuml.exe#uuml-win.exe
+          files: ./binaries/*
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
