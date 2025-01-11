@@ -1,14 +1,14 @@
 # UUML Tool
 
-## Description
-
 The UUML Tool is a command-line utility designed to replace German Umlauts in HTML files with their corresponding HTML entities. This tool is particularly useful for web developers who need to ensure that their HTML files are correctly encoded for different browsers and platforms.
 
-### Features
+## Features
 
 - Replace Umlauts (ä, ö, ü, Ä, Ö, Ü, ß) with their HTML entities (&auml;, &ouml;, &uuml;, &Auml;, &Ouml;, &Uuml;, &szlig;)
+- Also replaces the € symbol with its HTML entity (&euro;)
 - Process individual HTML files or entire directories containing HTML files
 - Simple and easy-to-use command-line interface
+- Platform support (Windows, Linux), no macOS support yet
 
 ## Usage
 
@@ -19,58 +19,57 @@ To use the UUML Tool, you can specify either a single HTML file or a directory c
 Replace Umlauts in a single HTML file:
 
 ```sh
-$ uuml -f path/to/file.html
+uuml -f path/to/file.html
 ```
 
 Replace Umlauts in all HTML files in a directory:
 
 ```sh
-$ uuml -d path/to/directory
+uuml -d path/to/directory
+```
+
+For the more lazy people, you can also simply call ```uuml``` without any arguments. This will replace Umlauts in all HTML files in the current directory.
+
+```sh
+uuml
 ```
 
 ## Installation
 
-### Prerequisites
+The UUML Tool is distributed as a standalone executable file for Windows and Linux. You can install it by the bellow installation files.
 
-- [Rust](https://www.rust-lang.org/tools/install) (required to build the tool)
+### Windows
 
-### Building from Source
-
-To build the UUML Tool from source, follow these steps:
-
-1. Clone the repository:
+There is a quick installation script for Windows. Just run the following command in a PowerShell window:
 
 ```sh
-$ git clone https://github.com/binary-blazer/uuml-tool.git
-$ cd uuml-tool
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/install.ps1'))
 ```
 
-2. Build the tool using Cargo:
+### Linux
+
+There is a quick installation script for Linux. Just run the following command in a terminal window:
 
 ```sh
-$ cargo build --release
+curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/install.sh | bash
 ```
 
-3. The compiled binary will be located in the `target/release` directory.
+## Uninstallation
 
-### Installing on Different Operating Systems
+To uninstall the UUML Tool, you can simply delete the executable file from your system. If you installed the tool using the installation scripts, you can run the following commands to uninstall it.
 
-#### Windows
+### Windows
 
-1. Download the precompiled binary for Windows from the [releases page](https://github.com/binary-blazer/uuml-tool/releases).
-2. Extract the downloaded ZIP file.
-3. Move the extracted binary to a directory in your system's `PATH`.
+Run the following command in a PowerShell window:
 
-#### macOS
+```sh
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/uninstall.ps1'))
+```
 
-1. Download the precompiled binary for macOS from the [releases page](https://github.com/binary-blazer/uuml-tool/releases).
-2. Extract the downloaded ZIP file.
-3. Move the extracted binary to a directory in your system's `PATH`.
+### Linux
 
-#### Linux
+Run the following command in a terminal window:
 
-1. Download the precompiled binary for Linux from the [releases page](https://github.com/binary-blazer/uuml-tool/releases).
-2. Extract the downloaded TAR file.
-3. Move the extracted binary to a directory in your system's `PATH`.
-
-Alternatively, you can build the tool from source as described in the "Building from Source" section.
+```sh
+curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/uninstall.sh | bash
+```
