@@ -3,7 +3,7 @@ use std::fs;
 
 fn main() {
     let matches = Command::new("uuml")
-        .version("1.0")
+        .version("1.1")
         .author("Jonas F. Franke <@jonasfranke@sdevs.org>")
         .about("Replaces Umlauts with their HTML entities")
         .arg(
