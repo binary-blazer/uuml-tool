@@ -1,5 +1,8 @@
 use clap::{Arg, Command};
 use std::fs;
+use std::process::Command as ProcessCommand;
+use std::env;
+use std::path::Path;
 
 fn main() {
     let matches = Command::new("uuml")
@@ -22,9 +25,18 @@ fn main() {
                 .help("Sets the directory containing HTML files to use")
                 .num_args(1),
         )
+        .arg(
+            Arg::new("update")
+                .short('u')
+                .long("update")
+                .help("Updates the CLI to the latest version")
+                .num_args(0),
+        )
         .get_matches();
 
-    if let Some(file) = matches.get_one::<String>("file") {
+    if matches.is_present("update") {
+        update_cli();
+    } else if let Some(file) = matches.get_one::<String>("file") {
         process_file(file);
     } else if let Some(directory) = matches.get_one::<String>("directory") {
         process_directory(directory);
@@ -81,4 +93,73 @@ fn replace_umlauts(content: &str) -> String {
     }
 
     result
+}
+
+fn update_cli() {
+    let current_exe = env::current_exe().expect("Failed to get current executable path");
+    let current_exe_path = current_exe.to_str().expect("Failed to convert path to str");
+
+    let latest_release_url = if cfg!(target_os = "windows") {
+        "https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest"
+    } else {
+        "https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest"
+    };
+
+    let output = ProcessCommand::new("curl")
+        .arg("-s")
+        .arg(latest_release_url)
+        .output()
+        .expect("Failed to execute curl command");
+
+    let response = String::from_utf8_lossy(&output.stdout);
+    let download_url = if cfg!(target_os = "windows") {
+        response
+            .lines()
+            .find(|line| line.contains("browser_download_url") && line.contains("uuml-win.exe"))
+            .expect("Failed to find download URL")
+            .split('"')
+            .nth(3)
+            .expect("Failed to extract download URL")
+    } else {
+        response
+            .lines()
+            .find(|line| line.contains("browser_download_url") && line.contains("uuml-linux"))
+            .expect("Failed to find download URL")
+            .split('"')
+            .nth(3)
+            .expect("Failed to extract download URL")
+    };
+
+    let temp_path = if cfg!(target_os = "windows") {
+        "C:\\Program Files\\uuml\\temp_uuml.exe"
+    } else {
+        "/usr/local/bin/temp_uuml"
+    };
+
+    ProcessCommand::new("curl")
+        .arg("-L")
+        .arg("-o")
+        .arg(temp_path)
+        .arg(download_url)
+        .status()
+        .expect("Failed to download latest version");
+
+    if cfg!(target_os = "windows") {
+        ProcessCommand::new("powershell")
+            .arg("-Command")
+            .arg(format!(
+                "Move-Item -Force -Path '{}' -Destination '{}'",
+                temp_path, current_exe_path
+            ))
+            .status()
+            .expect("Failed to replace executable");
+    } else {
+        ProcessCommand::new("sh")
+            .arg("-c")
+            .arg(format!("mv {} {}", temp_path, current_exe_path))
+            .status()
+            .expect("Failed to replace executable");
+    }
+
+    println!("Update complete. Please restart the CLI.");
 }
