@@ -36,6 +36,10 @@ jobs:
           name: ${{ matrix.target }}-binary
           path: target/${{ matrix.target }}/release/uuml
 
+      - name: List target directory (Windows)
+        if: matrix.target == 'x86_64-pc-windows-gnu'
+        run: ls target/${{ matrix.target }}/release
+
   release:
     needs: build
     runs-on: ubuntu-latest
