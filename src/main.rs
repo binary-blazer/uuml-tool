@@ -29,7 +29,7 @@ fn main() {
     } else if let Some(directory) = matches.get_one::<String>("directory") {
         process_directory(directory);
     } else {
-        println!("Please provide a file or directory.");
+        process_directory(".");
     }
 }
 
@@ -52,12 +52,33 @@ fn process_directory(directory: &str) {
 }
 
 fn replace_umlauts(content: &str) -> String {
-    content
-        .replace("ä", "&auml;")
-        .replace("ö", "&ouml;")
-        .replace("ü", "&uuml;")
-        .replace("Ä", "&Auml;")
-        .replace("Ö", "&Ouml;")
-        .replace("Ü", "&Uuml;")
-        .replace("ß", "&szlig;")
+    let mut result = String::new();
+    let mut in_comment = false;
+
+    for line in content.lines() {
+        if line.contains("<!--") {
+            in_comment = true;
+        }
+        if line.contains("-->") {
+            in_comment = false;
+        }
+
+        if in_comment {
+            result.push_str(line);
+        } else {
+            result.push_str(
+                &line
+                    .replace("ä", "&auml;")
+                    .replace("ö", "&ouml;")
+                    .replace("ü", "&uuml;")
+                    .replace("Ä", "&Auml;")
+                    .replace("Ö", "&Ouml;")
+                    .replace("Ü", "&Uuml;")
+                    .replace("ß", "&szlig;"),
+            );
+        }
+        result.push('\n');
+    }
+
+    result
 }
