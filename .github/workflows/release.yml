@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.target }}-binary
-          path: target/${{ matrix.target }}/release/uuml
+          path: target/${{ matrix.target }}/release/uuml${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || '' }}
 
       - name: List target directory (Windows)
         if: matrix.target == 'x86_64-pc-windows-gnu'
