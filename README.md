@@ -34,6 +34,14 @@ For the more lazy people, you can also simply call ```uuml``` without any argume
 uuml
 ```
 
+### Update
+
+To update the UUML Tool to the latest version, you can use the `update` command:
+
+```sh
+uuml --update
+```
+
 ## Installation
 
 The UUML Tool is distributed as a standalone executable file for Windows and Linux. You can install it by the bellow installation files.
