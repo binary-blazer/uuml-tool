@@ -11,4 +11,3 @@ cc = "1.0"
 
 [target.x86_64-apple-darwin.dependencies]
 cc = "1.0"
-osxcross = "0.1"
