@@ -2,7 +2,6 @@ use clap::{Arg, Command};
 use std::fs;
 use std::process::Command as ProcessCommand;
 use std::env;
-use std::path::Path;
 
 fn main() {
     let matches = Command::new("uuml")
@@ -34,7 +33,7 @@ fn main() {
         )
         .get_matches();
 
-    if matches.is_present("update") {
+    if matches.contains_id("update") {
         update_cli();
     } else if let Some(file) = matches.get_one::<String>("file") {
         process_file(file);
