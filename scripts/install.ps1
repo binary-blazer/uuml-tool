@@ -10,8 +10,14 @@ If (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # Get the latest release download URL from GitHub
 $latestReleaseUrl = (Invoke-RestMethod -Uri "https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest").assets | Where-Object { $_.name -eq "uuml-win.exe" } | Select-Object -ExpandProperty browser_download_url
 
+# Create the directory if it doesn't exist
+$destinationDir = "C:\Program Files\uuml"
+If (-Not (Test-Path -Path $destinationDir)) {
+    New-Item -ItemType Directory -Path $destinationDir
+}
+
 # Download the latest release
-$destinationPath = "C:\Program Files\uuml\uuml.exe"
+$destinationPath = "$destinationDir\uuml.exe"
 Invoke-WebRequest -Uri $latestReleaseUrl -OutFile $destinationPath
 
 # Add the executable to the PATH
