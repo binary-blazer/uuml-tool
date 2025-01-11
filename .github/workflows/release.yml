@@ -61,7 +61,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./binaries/x86_64-unknown-linux-gnu-binary#uuml-linux
-            ./binaries/x86_64-pc-windows-gnu-binary#uuml-win.exe
+            ./binaries/uuml#uuml-linux
+            ./binaries/uuml.exe#uuml-win.exe
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
