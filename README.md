@@ -51,7 +51,7 @@ The UUML Tool is distributed as a standalone executable file for Windows and Lin
 There is a quick installation script for Windows. Just run the following command in a PowerShell window:
 
 ```sh
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/install.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/refs/heads/master/scripts/install.ps1'))
 ```
 
 ### Linux
@@ -59,7 +59,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 There is a quick installation script for Linux. Just run the following command in a terminal window:
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/refs/heads/master/scripts/install.sh | bash
 ```
 
 ## Uninstallation
@@ -71,7 +71,7 @@ To uninstall the UUML Tool, you can simply delete the executable file from your 
 Run the following command in a PowerShell window:
 
 ```sh
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/uninstall.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/binary-blazer/uuml-tool/refs/heads/master/scripts/uninstall.ps1'))
 ```
 
 ### Linux
@@ -79,5 +79,5 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 Run the following command in a terminal window:
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/main/scripts/uninstall.sh | bash
+curl -sSL https://raw.githubusercontent.com/binary-blazer/uuml-tool/refs/heads/master/scripts/uninstall.ps1 | bash
 ```
