@@ -5,7 +5,7 @@ use std::env;
 
 fn main() {
     let matches = Command::new("uuml")
-        .version("1.1")
+        .version("1.2")
         .author("Jonas F. Franke <@jonasfranke@sdevs.org>")
         .about("Replaces Umlauts with their HTML entities")
         .arg(
