@@ -30,7 +30,14 @@ jobs:
       - name: Install dependencies for Apple Darwin
         if: matrix.target == 'x86_64-apple-darwin'
         run: |
-          sudo apt-get install -y clang
+          sudo apt-get update
+          sudo apt-get install -y clang cmake
+          git clone https://github.com/tpoechtrager/osxcross.git
+          cd osxcross
+          ./tools/get_dependencies.sh
+          UNATTENDED=yes OSX_VERSION_MIN=10.11 ./build.sh
+          export PATH=$PATH:$(pwd)/target/bin
+          cd ..
 
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
