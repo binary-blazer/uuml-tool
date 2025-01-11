@@ -12,6 +12,12 @@ fi
 # Get the latest release download URL from GitHub
 latest_release_url=$(curl -s https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest | grep "browser_download_url.*uuml-linux" | cut -d : -f 2,3 | tr -d \")
 
+# Create the directory if it doesn't exist
+destination_dir="/usr/local/bin"
+if [ ! -d "$destination_dir" ]; then
+  mkdir -p "$destination_dir"
+fi
+
 # Download the latest release
 curl -L -o /usr/local/bin/uuml $latest_release_url
 
