@@ -1,3 +1,6 @@
+# If you want to update this script, please make sure your code remains clean and readable.
+# The mission is to keep this file small and as simple as possible to make it easy to maintain.
+
 # Check if the script is run as administrator
 If (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Error "Please run this script as an administrator."
@@ -5,7 +8,7 @@ If (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 # Get the latest release download URL from GitHub
-$latestReleaseUrl = (Invoke-RestMethod -Uri "https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest").assets | Where-Object { $_.name -like "*windows-gnu*" } | Select-Object -ExpandProperty browser_download_url
+$latestReleaseUrl = (Invoke-RestMethod -Uri "https://api.github.com/repos/binary-blazer/uuml-tool/releases/latest").assets | Where-Object { $_.name -eq "uuml-win.exe" } | Select-Object -ExpandProperty browser_download_url
 
 # Download the latest release
 $destinationPath = "C:\Program Files\uuml\uuml.exe"
@@ -16,3 +19,4 @@ $env:Path += ";C:\Program Files\uuml"
 [System.Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Machine)
 
 Write-Output "Installation complete. 'uuml' is now available in your PATH."
+Write-Output "Reload/Restart your console and run 'uuml --help' to get started."
